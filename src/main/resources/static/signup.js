@@ -11,8 +11,7 @@ function register(name, lastName, email, password, passwordRepeat) {
 
     }
   };
-  xhttp.open("POST", "php/register.php?name=" +
-    name + "&lastName=" + lastName + "&email=" + email + "&password=" + password, true);
+  xhttp.open("POST", "signup?email="+ email + "&password=" + password, true);
   xhttp.send();
 }
 

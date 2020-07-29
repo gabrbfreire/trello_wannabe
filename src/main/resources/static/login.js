@@ -19,6 +19,6 @@ function login(name, password) {
 
     }
   };
-  xhttp.open("POST", "php/login.php?name=" + name + "&password=" + password, true);
+  xhttp.open("POST", "login.html?name=" + name + "&password=" + password, true);
   xhttp.send();
 }
