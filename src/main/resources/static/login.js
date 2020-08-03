@@ -8,7 +8,6 @@ function login(email, password) {
       } else {
         document.getElementById("result").innerHTML = this.responseText;
       }
-
     }
   };
   xhttp.open("POST", "login?email=" + email + "&password=" + password, true);

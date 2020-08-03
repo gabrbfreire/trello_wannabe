@@ -2,16 +2,7 @@ package com.example.trello_wannabe;
 
 import javax.persistence.*;
 
-// -- STORED PROCEDURES --
-@NamedNativeQueries({
-    @NamedNativeQuery(
-        name="SelectUserByEmail",
-        query = "CALL SelectUserByEmail(:email)",
-        resultClass = User.class
-    )
-})
-
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +11,7 @@ public class User {
     private String email_user;
 
     private String password_user;
+
 
     public Integer getId() {
         return id_user;
