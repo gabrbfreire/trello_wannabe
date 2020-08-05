@@ -37,8 +37,11 @@ public class MainController{
         if(userList.isEmpty()){
             return "User not found";
         }else{
-            return "User found";
+            if(password.equals(userList.get(0).getPassword())){
+                return "Valid";
+            }else{
+                return "Password incorrect";
+            }
         }
-
     }
 }

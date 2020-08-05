@@ -16,4 +16,9 @@ public class GreetingController {
         return "signup";
     }
 
+    @GetMapping("/main")
+    public String main(){
+        return "main";
+    }
+
 }
