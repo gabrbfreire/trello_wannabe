@@ -1,10 +1,10 @@
 function register(name, lastName, email, password, passwordRepeat) {
-  var xhttp = new XMLHttpRequest();
+  let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 
       if (this.responseText == "Saved") {
-        window.location.href = 'main';
+        window.location.href = 'boards';
       } else {
         document.getElementById("result").innerHTML = 'this.responseText';
       }
@@ -17,11 +17,11 @@ function register(name, lastName, email, password, passwordRepeat) {
 
 
 document.getElementById('register-form').addEventListener('submit', function () {
-  var name = document.getElementById('user-name').value;
-  var lastName = document.getElementById('user-last-name').value;
-  var email = document.getElementById('user-email').value;
-  var password = document.getElementById('user-password').value;
-  var passwordRepeat = document.getElementById('user-repeat-password').value;
+  let name = document.getElementById('user-name').value;
+  let lastName = document.getElementById('user-last-name').value;
+  let email = document.getElementById('user-email').value;
+  let password = document.getElementById('user-password').value;
+  let passwordRepeat = document.getElementById('user-repeat-password').value;
 
   if (password === passwordRepeat) {
     register(name, lastName, email, password, passwordRepeat);

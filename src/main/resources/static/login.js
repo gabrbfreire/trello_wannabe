@@ -1,10 +1,10 @@
 function login(email, password) {
-  var xhttp = new XMLHttpRequest();
+  let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 
       if (this.responseText == "Valid") {
-        window.location.href = 'main';
+        window.location.href = 'boards';
       } else {
         document.getElementById("result").innerHTML = this.responseText;
       }
@@ -16,8 +16,8 @@ function login(email, password) {
 
 
 document.getElementById('login-form').addEventListener('submit', function () {
-  var email = document.getElementById('user-email').value;
-  var password = document.getElementById('user-password').value;
+  let email = document.getElementById('user-email').value;
+  let password = document.getElementById('user-password').value;
   login(email, password);
   event.preventDefault();
 });

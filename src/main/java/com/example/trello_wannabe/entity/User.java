@@ -1,4 +1,4 @@
-package com.example.trello_wannabe;
+package com.example.trello_wannabe.entity;
 
 import javax.persistence.*;
 
