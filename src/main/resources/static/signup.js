@@ -17,14 +17,12 @@ function register(name, lastName, email, password, passwordRepeat) {
 
 
 document.getElementById('register-form').addEventListener('submit', function () {
-  let name = document.getElementById('user-name').value;
-  let lastName = document.getElementById('user-last-name').value;
   let email = document.getElementById('user-email').value;
   let password = document.getElementById('user-password').value;
   let passwordRepeat = document.getElementById('user-repeat-password').value;
 
   if (password === passwordRepeat) {
-    register(name, lastName, email, password, passwordRepeat);
+    register(email, password, passwordRepeat);
   } else {
     document.getElementById('result').innerHTML = "Passwords do not match";
   }

@@ -2,34 +2,36 @@ package com.example.trello_wannabe.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_user;
-
-    private String email_user;
-
-    private String password_user;
+    private Integer user_id;
+    private String user_email;
+    private String user_password;
 
 
-    public Integer getId() {
-        return id_user;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public String getEmail() {
-        return email_user;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public void setEmail(String email) {
-        this.email_user = email;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setPassword(String password) {
-        this.password_user = password;
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 
-    public String getPassword() {
-        return password_user;
+    public String getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
     }
 }

@@ -4,20 +4,21 @@ import com.example.trello_wannabe.entity.User;
 import com.example.trello_wannabe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 @Service
+@SessionAttributes("userId")
 public class UserService {
 
-    private UserRepository repo;
-    private String email;
-
     @Autowired
-    public UserService(UserRepository repo){
-        this.repo = repo;
-    }
+    private UserRepository repo;
+    //private Integer userId;
 
+//    public int getUserId() {
+//        return userId;
+//    }
 
     public List<User> listAll(){
         return repo.findAll();
@@ -39,35 +40,37 @@ public class UserService {
     public String addNewUser(String email, String password){
 
         User n = new User();
-        n.setEmail(email);
-        n.setPassword(password);
-        this.save(n);
+        n.setUser_email(email);
+        n.setUser_password(password);
+        repo.save(n);
         return "Saved";
 
     }
 
     //Finds user by email and checks password
-    public String findUserByEmail(String email, String password) {
-        this.email = email;
+    public User findUserByEmail(String email, String password) {
 
         //Gets data from repository
         List<User> userList = repo.findUserByEmail(email);
+        //userId = userList.get(0).getUser_id();
 
         if(userList.isEmpty()){
-            return "User not found";
+            return null;
         }else{
-            if(password.equals(userList.get(0).getPassword())){
-                return "Valid";
+            if(passwordCorrect(password, userList)){
+                return userList.get(0);
             }else{
-                return "Password incorrect";
+                return null;
             }
         }
     }
 
-    public String findUserBoards(){
-        List<User> userList = repo.findUserByEmail(email);
-
-        System.out.println(userList);
-        return "userList.get(0).toString()";
+    public Boolean passwordCorrect(String password, List<User> userList){
+        if(password.equals(userList.get(0).getUser_password())){
+            return true;
+        }else{
+            return false;
+        }
     }
+
 }

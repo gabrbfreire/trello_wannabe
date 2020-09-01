@@ -1,0 +1,13 @@
+package com.example.trello_wannabe.repository;
+
+import com.example.trello_wannabe.entity.Board;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface BoardRepository extends JpaRepository<Board, Integer> {
+
+    @Query(value = "CALL SelectBoardsByUserId(?1)", nativeQuery = true)
+    List<Board> selectBoardsByUserId(Integer id);
+}
