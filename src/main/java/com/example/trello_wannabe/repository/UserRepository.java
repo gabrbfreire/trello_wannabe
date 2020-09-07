@@ -14,5 +14,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     // Stored Procedures
     @Query(value = "CALL SelectUserByEmail(?1)", nativeQuery = true)
     List<User> findUserByEmail(String email);
-
 }

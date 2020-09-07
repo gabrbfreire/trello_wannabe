@@ -4,21 +4,14 @@ import com.example.trello_wannabe.entity.User;
 import com.example.trello_wannabe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 @Service
-@SessionAttributes("userId")
 public class UserService {
 
     @Autowired
     private UserRepository repo;
-    //private Integer userId;
-
-//    public int getUserId() {
-//        return userId;
-//    }
 
     public List<User> listAll(){
         return repo.findAll();
@@ -52,7 +45,6 @@ public class UserService {
 
         //Gets data from repository
         List<User> userList = repo.findUserByEmail(email);
-        //userId = userList.get(0).getUser_id();
 
         if(userList.isEmpty()){
             return null;

@@ -1,9 +1,9 @@
 package com.example.trello_wannabe.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class GreetingController {
 
     @GetMapping("/login")
@@ -20,6 +20,4 @@ public class GreetingController {
     public String boards(){
         return "boards";
     }
-
-
 }
