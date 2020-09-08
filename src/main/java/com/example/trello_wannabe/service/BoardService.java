@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -15,34 +16,26 @@ public class BoardService {
     private BoardRepository repo;
     private UserService userService;
 
-    public List<Board> findBoards(User user){
+    public List<Board> getBoards(User user){
         List<Board> boardList = repo.selectBoardsByUserId(user.getUser_id());
         return boardList;
     }
 
-    public String addBoard(String boardName, User user){
-        try{
-            Board n = new Board();
-            n.setBoard_name(boardName);
-            n.setUser_id_user(user.getUser_id());
-            repo.save(n);
-            return "Saved";
-        }catch (Exception e){
-            return "Could not add Board";
-        }
+    public void createBoard(String boardName, User user){
+        Board newBoard = new Board();
+        newBoard.setBoard_name(boardName);
+        newBoard.setUser_id_user(user.getUser_id());
+        repo.save(newBoard);
     }
 
-    public String updateBoard(Integer BoardId, String boardName){
-        try {
-            repo.updateBoard(BoardId, boardName);
-            return "Updated board";
-        }catch (Exception e){
-            return "Could not update board";
-        }
+    public void updateBoard(Integer boardId, String boardName){
+        Optional<Board> boardData = repo.findById(boardId);
+        Board board = boardData.get();
+        board.setBoard_name(boardName);
+        repo.save(board);
     }
 
-//    public deleteBoard(Integer BoardId){
-//        repo.deleteBoard
-//    }
-
+    public void deleteBoard(Integer boardId){
+        repo.deleteById(boardId);
+    }
 }
