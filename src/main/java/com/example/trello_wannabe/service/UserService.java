@@ -30,14 +30,11 @@ public class UserService {
     }
 
     //Inserts new user into the database
-    public String addNewUser(String email, String password){
-
-        User n = new User();
-        n.setUser_email(email);
-        n.setUser_password(password);
-        repo.save(n);
-        return "Saved";
-
+    public void addNewUser(String email, String password){
+        User newUser = new User();
+        newUser.setUser_email(email);
+        newUser.setUser_password(password);
+        repo.save(newUser);
     }
 
     //Finds user by email and checks password

@@ -22,28 +22,42 @@ public class MainController{
 
 
     // -----USER-----
-    // Sign up
-    @PostMapping(path="/signup") // Map ONLY POST Requests
-    public String addUser (@RequestParam String email, @RequestParam String password){
-
-        //Inserts new user into the database
-        return userService.addNewUser(email, password);
-    }
-
     // Login
+    // Get user
     @ModelAttribute("user") //Session model
     @PostMapping(path="/login")
-    public User getAllUsers(@RequestParam String email, @RequestParam String password) {
-
-        //Finds user by email and checks password
-        return userService.findUserByEmail(email, password);
+    public ResponseEntity<User> getAllUsers(@RequestParam String email, @RequestParam String password) {
+        try{
+            return new ResponseEntity<>(userService.findUserByEmail(email, password), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+    // Sign up
+    // Create user
+    @PostMapping(path="/signup") // Map ONLY POST Requests
+    public ResponseEntity<HttpStatus> addUser (@RequestParam String email, @RequestParam String password){
+        try{
+            userService.addNewUser(email, password);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //TODO UpdateUserEmail
+    //todo UpdateUserPassword
 
     // Logout
     @GetMapping(path="/logout")
-    public String logout(HttpSession session){
-        session.invalidate();
-        return "Logged out";
+    public ResponseEntity<HttpStatus> logout(HttpSession session){
+        try {
+            session.invalidate();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
