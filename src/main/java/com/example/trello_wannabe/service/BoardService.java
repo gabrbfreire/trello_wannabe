@@ -14,7 +14,6 @@ public class BoardService {
 
     @Autowired
     private BoardRepository repo;
-    private UserService userService;
 
     public List<Board> getBoards(User user){
         List<Board> boardList = repo.selectBoardsByUserId(user.getUser_id());

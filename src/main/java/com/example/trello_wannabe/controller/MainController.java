@@ -1,24 +1,28 @@
 package com.example.trello_wannabe.controller;
 
 import com.example.trello_wannabe.entity.Board;
+import com.example.trello_wannabe.entity.Card;
 import com.example.trello_wannabe.entity.User;
 import com.example.trello_wannabe.service.BoardService;
+import com.example.trello_wannabe.service.CardService;
 import com.example.trello_wannabe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController // This means that this class is a Controller
 @SessionAttributes("user")  //Session attributes
 public class MainController{
+
     @Autowired
     private UserService userService;
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private CardService cardService;
 
 
     // -----USER-----
@@ -26,11 +30,11 @@ public class MainController{
     // Get user
     @ModelAttribute("user") //Session model
     @PostMapping(path="/login")
-    public ResponseEntity<User> getAllUsers(@RequestParam String email, @RequestParam String password) {
+    public User getAllUsers(@RequestParam String email, @RequestParam String password) {
         try{
-            return new ResponseEntity<>(userService.findUserByEmail(email, password), HttpStatus.OK);
+            return userService.findUserByEmail(email, password);
         }catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return null;
         }
     }
 
@@ -48,17 +52,6 @@ public class MainController{
 
     //TODO UpdateUserEmail
     //todo UpdateUserPassword
-
-    // Logout
-    @GetMapping(path="/logout")
-    public ResponseEntity<HttpStatus> logout(HttpSession session){
-        try {
-            session.invalidate();
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
 
 
@@ -108,9 +101,58 @@ public class MainController{
 
 
 
+    // -----CARDS-----
+    // Get Cards
+    @GetMapping(path = "/cards")
+    public ResponseEntity<List<Card>> getCardsByBoardId(@RequestParam Integer boardId){
+        try {
+            return new ResponseEntity<>(cardService.getCards(boardId), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Create Card
+    @PostMapping(path = "/cards")
+    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @RequestParam Integer boardId, @SessionAttribute("user") User user){
+        try{
+            cardService.createCard(title, boardId, user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Update Card
+    @PutMapping(path = "/cards")
+    public ResponseEntity<HttpStatus> updateCard(@RequestParam Integer cardId, @RequestParam String title){
+        try {
+            cardService.updateCard(cardId, title);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Delete Card
+    @DeleteMapping(path = "/cards")
+    public ResponseEntity<HttpStatus> deleteCard(@RequestParam Integer cardId){
+        try {
+            cardService.deleteCard(cardId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     // +++++++++++++++++++++ PRINTS SESSION ++++++++++++++++++++++++++
     @GetMapping(path="/boards/showSession")
     public User showSession(@SessionAttribute("user") User user) {
-        return user;
+        try {
+            return user;
+        }catch (Exception e){
+            return null;
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.trello_wannabe.repository;
 import com.example.trello_wannabe.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     // Stored Procedures
-    @Query(value = "CALL SelectUserByEmail(?1)", nativeQuery = true)
-    List<User> findUserByEmail(String email);
+    @Query(value = "CALL SelectUserByEmail(:email)", nativeQuery = true)
+    List<User> findUserByEmail(@Param("email") String email);
 }

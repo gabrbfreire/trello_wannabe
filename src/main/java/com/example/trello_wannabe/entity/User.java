@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 @Entity(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
     private String user_email;
     private String user_password;
-
 
     public Integer getUser_id() {
         return user_id;

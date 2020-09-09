@@ -2,6 +2,7 @@ package com.example.trello_wannabe.entity;
 
 import javax.persistence.*;
 
+@Entity(name = "boards")
 public class Board {
 
     @Id

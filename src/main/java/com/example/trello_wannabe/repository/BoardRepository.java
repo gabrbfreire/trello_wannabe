@@ -11,5 +11,4 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     @Query(value = "CALL SelectBoardsByUserId(:user_id);", nativeQuery = true)
     List<Board> selectBoardsByUserId(@Param("user_id") Integer id);
-
 }
