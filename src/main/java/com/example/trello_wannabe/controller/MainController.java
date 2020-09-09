@@ -104,7 +104,7 @@ public class MainController{
     // -----CARDS-----
     // Get Cards
     @GetMapping(path = "/cards")
-    public ResponseEntity<List<Card>> getCardsByBoardId(@RequestParam Integer boardId){
+    public ResponseEntity<List<Card>> getCardsByBoardId(@RequestParam Integer boardId, @SessionAttribute("user") User user){
         try {
             return new ResponseEntity<>(cardService.getCards(boardId), HttpStatus.OK);
         }catch (Exception e){

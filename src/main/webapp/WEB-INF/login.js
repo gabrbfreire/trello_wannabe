@@ -3,7 +3,7 @@ function login(email, password) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 
-      if (this.responseText == "Valid") {
+      if (this.status == 200) {
         window.location.href = 'boards';
       } else {
         document.getElementById("result").innerHTML = this.responseText;

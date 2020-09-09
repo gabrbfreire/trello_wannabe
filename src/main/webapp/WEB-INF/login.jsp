@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: GabF
+  Date: 09/09/2020
+  Time: 16:53
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
 <head>
@@ -24,22 +31,22 @@
 
 <body class="bg-gradient-primary">
 
-    <form id="login-form">
+<form id="login-form">
 
-        <input type="email" class="form-control form-control-user" id="user-email"
-               aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
-        <input type="password" class="form-control form-control-user" id="user-password"
-               placeholder="Password" required>
+    <input type="email" class="form-control form-control-user" id="user-email"
+           aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+    <input type="password" class="form-control form-control-user" id="user-password"
+           placeholder="Password" required>
 
-        <button class="btn btn-primary btn-user btn-block">
-            Login
-        </button>
+    <button class="btn btn-primary btn-user btn-block">
+        Login
+    </button>
 
-    </form>
-    <h6 id="result" class="text-danger"></h6>
+</form>
+<h6 id="result" class="text-danger"></h6>
 
 
-    <script src="login.js"></script>
+<script src="login.js"></script>
 </body>
 
 </html>
