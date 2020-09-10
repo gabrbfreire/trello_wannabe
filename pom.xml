@@ -11,7 +11,6 @@
 	<groupId>com.example</groupId>
 	<artifactId>trello_wannabe</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>trello_wannabe</name>
 	<description>Trello copy project for Spring Boot</description>
 
@@ -24,12 +23,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

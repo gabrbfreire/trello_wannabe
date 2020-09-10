@@ -7,34 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BoardService {
 
     @Autowired
-    private BoardRepository repo;
+    private BoardRepository boardRepository;
 
     public List<Board> getBoards(User user){
-        List<Board> boardList = repo.selectBoardsByUserId(user.getUser_id());
+
+        List<Board> boardList = boardRepository.selectBoardsByUserId(user.getUser_id());
         return boardList;
     }
 
     public void createBoard(String boardName, User user){
+
         Board newBoard = new Board();
         newBoard.setBoard_name(boardName);
         newBoard.setUser_id_user(user.getUser_id());
-        repo.save(newBoard);
+        boardRepository.save(newBoard);
     }
 
-    public void updateBoard(Integer boardId, String boardName){
-        Optional<Board> boardData = repo.findById(boardId);
-        Board board = boardData.get();
-        board.setBoard_name(boardName);
-        repo.save(board);
+    public void updateBoard(Integer boardId, String boardNewName, User user){
+
+        boardRepository.updateBoard(boardId, boardNewName, user.getUser_id());
     }
 
-    public void deleteBoard(Integer boardId){
-        repo.deleteById(boardId);
+    public void deleteBoard(Integer boardId, User user){
+
+        boardRepository.deleteBoard(boardId, user.getUser_id());
     }
 }

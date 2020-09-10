@@ -3,6 +3,23 @@ package com.example.trello_wannabe.entity;
 import javax.persistence.*;
 
 @Entity(name = "boards")
+@NamedStoredProcedureQuery(
+        name = "UpdateBoard",
+        procedureName = "UpdateBoard",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardId", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardNewName", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
+        }
+)
+@NamedStoredProcedureQuery(
+        name = "DeleteBoard",
+        procedureName = "DeleteBoard",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardId", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
+        }
+)
 public class Board {
 
     @Id
