@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
 
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,32 +10,35 @@
 
     <title>Signup</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link href="signup.css" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="text-center">
 
-<form class="user" id="register-form">
-    <div class="form-group">
-        <input type="email" class="form-control form-control-user" id="user-email"
-               placeholder="Email Address" required>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <input type="password" class="form-control form-control-user" id="user-password"
-                   placeholder="Password" required>
-        </div>
-        <div class="col-sm-6">
-            <input type="password" class="form-control form-control-user" id="user-repeat-password"
-                   placeholder="Repeat Password" required>
-        </div>
-    </div>
-    <button class="btn btn-primary btn-user btn-block">
-        Register Account
-    </button>
+    <form class="form-signin" id="register-form">
 
-</form>
+        <h1 class="text-primary font-weight-light">Trello Clone</h1>
 
-<script src="signup.js"></script>
+        <input type="email" class="form-control form-control-user" id="user-email" placeholder="Email Address" required>
+
+        <input type="password" class="form-control form-control-user" id="user-password" placeholder="Password"
+            required>
+
+        <input type="password" class="form-control form-control-user" id="user-repeat-password"
+            placeholder="Repeat Password" required>
+
+        <div class="checkbox mb-3"></div>
+        <h6 id="result" class="text-danger"> </h6>
+        <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Sign up</button>
+        <a href="login.html">Log in</a>
+
+    </form>
+
+
+    <script src="signup.js"></script>
 </body>
 
 </html>

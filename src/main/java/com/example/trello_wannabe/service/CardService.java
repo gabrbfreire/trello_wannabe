@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardService {
@@ -36,6 +37,18 @@ public class CardService {
 
     public void deleteCard(Integer cardId, User user){
 
-        cardRepository.deleteById(cardId);
+        // Checks if the user who owns the card is making the change
+        // Is this needed?
+        // if its need do it here or in the DB?
+        Optional<Card> cardOptional = cardRepository.findById(cardId);
+
+        if(cardOptional.isPresent()){
+            Card card = cardOptional.get();
+            if(card.getUser_id() == user.getUser_id()){
+                cardRepository.deleteById(cardId);
+            }else{
+                //return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
     }
 }

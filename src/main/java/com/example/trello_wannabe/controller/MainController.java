@@ -147,7 +147,7 @@ public class MainController{
 
     // Delete Card
     @DeleteMapping(path = "/cards")
-    public ResponseEntity<HttpStatus> deleteCard(@RequestParam Integer cardId, @RequestParam User user){
+    public ResponseEntity<HttpStatus> deleteCard(@RequestParam Integer cardId, @SessionAttribute("user") User user){
         try {
             cardService.deleteCard(cardId, user);
             return new ResponseEntity<>(HttpStatus.OK);

@@ -11,12 +11,13 @@ function register(name, lastName, email, password, passwordRepeat) {
 
     }
   };
-  xhttp.open("POST", "signup?email="+ email + "&password=" + password, true);
+  xhttp.open("POST", "signup?email=" + email + "&password=" + password, true);
   xhttp.send();
 }
 
 
 document.getElementById('register-form').addEventListener('submit', function () {
+
   let email = document.getElementById('user-email').value;
   let password = document.getElementById('user-password').value;
   let passwordRepeat = document.getElementById('user-repeat-password').value;
