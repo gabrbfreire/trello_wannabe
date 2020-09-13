@@ -1,24 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="bg-light">
 
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>Boards</title>
 
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="boards.css" rel="stylesheet">
 </head>
 
-<body id="page-top">
+<body>
+    <header>
+        <div class="flex-column navbar navbar-dark bg-primary box-shadow p-3">
+            <div class="container d-flex justify-content-between">
+                <h5 class="my-0 mr-md-auto font-weight-normal text-light">Boards</h5>
+                <nav class="my-2 my-md-0 mr-md-3">
+                    <a class="p-2 text-light" href="#">Email@email.com</a>
+                    <a class="p-2 text-light" href="#">Logout</a>
+                </nav>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-<button>Boards</button>
-<button>Teams</button>
+    <main role="main bg-light">
 
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
 
-<script src="boards.js"></script>
+                    <div class="col-md-3">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-body">
+                                <p class="card-text">This is a board.</p>
+                                <div class="d-flex justify-content-end">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card mb-4 box-shadow">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">New Board</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="boards.css"></script>
 </body>
 
 </html>
