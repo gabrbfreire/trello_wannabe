@@ -12,7 +12,6 @@ public class UserService {
 
     @Autowired
     private UserRepository repo;
-
 //    public List<User> listAll(){
 //        return repo.findAll();
 //    }
@@ -61,5 +60,4 @@ public class UserService {
             return false;
         }
     }
-
 }

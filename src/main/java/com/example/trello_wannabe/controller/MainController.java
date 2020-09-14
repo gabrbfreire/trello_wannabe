@@ -28,14 +28,23 @@ public class MainController{
     // -----USER-----
     // Login
     // Get user
-    @ModelAttribute("user") //Session model
     @PostMapping(path="/login")
-    public User getAllUsers(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<HttpStatus> getAllUsers(@RequestParam String email, @RequestParam String password) {
         try{
-            return userService.findUserByEmail(email, password);
+            if(createSession(email, password)!=null){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }catch (Exception e){
-            return null;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @ModelAttribute("user") //Session model
+    private User createSession(String email, String password){
+
+        return userService.findUserByEmail(email, password);
     }
 
     // Sign up
@@ -49,10 +58,6 @@ public class MainController{
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    //TODO UpdateUserEmail
-    //todo UpdateUserPassword
-
 
 
     // -----BOARDS-----
