@@ -19,6 +19,14 @@ $(document).ready(
                 console.log(data);
             }
         })
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/boards/getEmail",
+            success:function(data) {
+                $('#email').text(data);
+                console.log(data);
+            }
+        })
     })
 )
 

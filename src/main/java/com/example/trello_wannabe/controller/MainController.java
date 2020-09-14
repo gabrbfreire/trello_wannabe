@@ -70,6 +70,15 @@ public class MainController{
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    // Get Email for header
+    @GetMapping(path="/boards/getEmail")
+    public ResponseEntity<String> getUserEmail(@SessionAttribute("user") User user) {
+        try {
+            return new ResponseEntity<>(user.getUser_email(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     // Create Board
     @PostMapping(path="/boards")

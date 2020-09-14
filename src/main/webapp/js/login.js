@@ -15,9 +15,9 @@
 } */
 
 
-document.getElementById('login-form').addEventListener('submit', function () {
-  let email = document.getElementById('user-email').value;
-  let password = document.getElementById('user-password').value;
+$('#login-form').on('submit', function () {
+  let email = $('#user-email').value;
+  let password = $('#user-password').value;
   login(email, password);
   event.preventDefault();
 });
