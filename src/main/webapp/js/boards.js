@@ -59,7 +59,7 @@ function buildBoards(data){
             '<div class="col-md-3 board">' +
             '<div class="card mb-4 box-shadow">' +
             '<div class="card-body">' +
-            '<p class="card-text id="card-text-'+data[index].board_id+'">' + data[index].board_name + '</p>' +
+            '<p class="card-text" id="card-text-'+data[index].board_id+'">' + data[index].board_name + '</p>' +
             '<div class="d-flex justify-content-end">' +
             '<div class="btn-group" id="'+ data[index].board_id +'">' +
             '<button type="button" class="btn btn-sm btn-outline-secondary">View</button>' +
@@ -91,9 +91,12 @@ function setDeleteAndUpdateEvents(){
 
     //DELETE
     $('.delete-button').on('click', function (){
-
         boardId = $(this).closest('div').attr('id');
-        console.log(boardId);
+        boardName = $('#card-text-' + boardId).html();
+
+        console.log(boardName);
+        // Shows current name on the delete modal title
+        $('#delete-modal-title').val(boardName);
     });
 
     $('#delete-modal-button').on('click', function (){
@@ -110,8 +113,10 @@ function setDeleteAndUpdateEvents(){
     //UPDATE
     $('.update-button').on('click', function (){
         boardId = $(this).closest('div').attr('id');
-        boardName = $('# card-text-' + boardId).html();
-        console.log('#card-text-' + boardId);
+        boardName = $('#card-text-' + boardId).html();
+
+        // Shows current name on the update input
+        $('#board-new-name').val(boardName);
     });
 
     $('#update-modal-button').on('click', function (){
