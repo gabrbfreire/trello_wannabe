@@ -40,23 +40,10 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="new-board-button">
                         <div class="card mb-4 box-shadow">
-                            <div class="card-body">
-                                <p class="card-text">This is a board.</p>
-                                <div class="d-flex justify-content-end">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="card mb-4 box-shadow">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">New Board</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                                data-target="#newBoardModal">New Board</button>
                         </div>
                     </div>
 
@@ -64,9 +51,68 @@
             </div>
         </div>
 
-    </main>
 
+        <div class="modal fade" id="newBoardModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Board</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="email" class="m-4 rounded bg-light" id="board-name"
+                           aria-describedby="emailHelp" placeholder="Board name">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="new-board-modal-button" data-dismiss="modal">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteBoardModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Board name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h7 class="m-3">Are you sure you want to delete this board?</h7>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="delete-modal-button" data-dismiss="modal">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="updateBoardModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change board name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="email" class="m-4 rounded bg-light" id="board-new-name"
+                           aria-describedby="emailHelp" placeholder="Board new name">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="update-modal-button" data-dismiss="modal">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="js/boards.js"></script>
 </body>
 
