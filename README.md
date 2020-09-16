@@ -1,3 +1,3 @@
-# trello_wannabe
+# Trello Clone
 
-Using Spring
+Using Spring, Thymeleaf, JQuery, Bootstrap and MySQL
