@@ -24,7 +24,7 @@ function getBoards(){
         url: "http://localhost:8080/boards/get",
         success:function(data) {
             buildBoards(data);
-            setDeleteAndUpdateEvents();
+            setViewDeleteUpdateEvents();
         }
     });
 }
@@ -62,7 +62,7 @@ function buildBoards(data){
             '<p class="card-text" id="card-text-'+data[index].board_id+'">' + data[index].board_name + '</p>' +
             '<div class="d-flex justify-content-end">' +
             '<div class="btn-group" id="'+ data[index].board_id +'">' +
-            '<button type="button" class="btn btn-sm btn-outline-secondary">View</button>' +
+            '<button type="button" class="view-button btn btn-sm btn-outline-secondary">View</button>' +
             '<button type="button" class="update-button btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#updateBoardModal">Edit</button>' +
             '<button type="button" class="delete-button btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#deleteBoardModal">Delete</button>'
         )
@@ -86,7 +86,7 @@ function createNewBoard(){
 }
 
 // Creates events after the boards are created
-function setDeleteAndUpdateEvents(){
+function setViewDeleteUpdateEvents(){
     let boardId, boardName;
 
     //DELETE
@@ -94,9 +94,8 @@ function setDeleteAndUpdateEvents(){
         boardId = $(this).closest('div').attr('id');
         boardName = $('#card-text-' + boardId).html();
 
-        console.log(boardName);
         // Shows current name on the delete modal title
-        $('#delete-modal-title').val(boardName);
+        $('#delete-modal-title').html(boardName);
     });
 
     $('#delete-modal-button').on('click', function (){
@@ -131,5 +130,20 @@ function setDeleteAndUpdateEvents(){
             }
         });
     });
+
+
+    $('.view-button').on('click', function (){
+        boardId = $(this).closest('div').attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/boards/storeBoardId",
+            data: {boardId: boardId},
+            success:function() {
+                window.location.href = 'cards'
+            }
+        });
+    });
+
 }
 

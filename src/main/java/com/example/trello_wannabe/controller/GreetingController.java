@@ -25,4 +25,9 @@ public class GreetingController {
 //        }
         return "boards";
     }
+
+    @GetMapping("cards")
+    public String cards(){
+        return "cards";
+    }
 }
