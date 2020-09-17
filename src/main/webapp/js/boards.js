@@ -11,7 +11,10 @@ function logout() {
 }
 
 $(document).ready(function () {
-
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/endBoardSession"
+    })
     getBoards();
     getUserEmail();
 });
@@ -131,7 +134,7 @@ function setViewDeleteUpdateEvents(){
         });
     });
 
-
+    //VIEW
     $('.view-button').on('click', function (){
         boardId = $(this).closest('div').attr('id');
 

@@ -20,9 +20,9 @@ public class CardService {
         return cardRepository.selectCardsByListId(boardId);
     }
 
-    public void createCard(String title, Integer listId, User user){
+    public void createCard(String title, Integer listId, User user, Integer boardId){
 
-        cardRepository.createCard(title, listId, user.getUser_id());
+        cardRepository.createCard(title, listId, user.getUser_id(), boardId);
     }
 
     public void updateCardTitle(Integer cardId, String newTitle, User user){

@@ -50,9 +50,9 @@ public class CardController {
 
     // Create Card
     @PostMapping(path = "/cards")
-    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @RequestParam Integer listId, @SessionAttribute("user") User user){
+    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @RequestParam Integer listId, @SessionAttribute("user") User user, @SessionAttribute("currentBoardId") Integer boardId){
         try{
-            cardService.createCard(title, listId, user);
+            cardService.createCard(title, listId, user, boardId);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

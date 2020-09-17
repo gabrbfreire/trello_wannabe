@@ -13,4 +13,9 @@ public class LogoutController {
     public void logout(HttpSession session){
         session.invalidate();
     }
+
+    @GetMapping(path="/endBoardSession")
+    public void endBoardSession(HttpSession session){
+        session.removeAttribute("currentBoardId");
+    }
 }

@@ -1,3 +1,4 @@
+
 $("#logout").on("click", logout);
 
 function logout() {
@@ -13,6 +14,7 @@ function logout() {
 $(document).ready(function () {
 
     getCards();
+    getLists();
     getUserEmail();
 });
 
@@ -22,6 +24,17 @@ function getCards(){
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/cards/get",
+        success:function(data) {
+            console.log(data);
+            //buildBoards(data);
+        }
+    });
+}
+
+function getLists(){
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/lists",
         success:function(data) {
             console.log(data);
             //buildBoards(data);

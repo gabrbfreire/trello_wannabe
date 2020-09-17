@@ -9,7 +9,8 @@ import javax.persistence.*;
         parameters = {
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "cardTitle", type = String.class),
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "listId", type = Integer.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardId", type = Integer.class)
         }
         )
 @NamedStoredProcedureQuery(
