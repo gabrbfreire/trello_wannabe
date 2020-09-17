@@ -46,7 +46,7 @@ function getUserEmail(){
 function buildBoards(data){
 
     // Removes all boards from page
-    $( ".row" ).empty();
+    $(".row").empty();
 
     // Creates the "New Board" button
     $('.row').append(
