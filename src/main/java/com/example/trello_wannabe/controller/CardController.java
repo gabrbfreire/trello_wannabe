@@ -39,9 +39,9 @@ public class CardController {
     // -----CARDS-----
     // Get Cards
     @GetMapping(path = "/cards/get")
-    public ResponseEntity<List<Card>> getCardsByBoardId(@SessionAttribute("currentBoardId") Integer boardId, @SessionAttribute("user") User user){
+    public ResponseEntity<List<Card>> getCardsByListId(@SessionAttribute("currentBoardId") Integer boardId, @SessionAttribute("user") User user){
         try {
-            return new ResponseEntity<>(cardService.getCards(boardId, user), HttpStatus.OK);
+            return new ResponseEntity<>(cardService.getCards(boardId), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -50,9 +50,9 @@ public class CardController {
 
     // Create Card
     @PostMapping(path = "/cards")
-    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @SessionAttribute("currentBoardId") Integer boardId, @SessionAttribute("user") User user){
+    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @RequestParam Integer listId, @SessionAttribute("user") User user){
         try{
-            cardService.createCard(title, boardId, user);
+            cardService.createCard(title, listId, user);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,9 +72,9 @@ public class CardController {
 
     // Update Card Board
     @PutMapping(path = "/cards/updateBoard")
-    public ResponseEntity<HttpStatus> updateCardBoard(@RequestParam Integer cardId, @RequestParam Integer newBoard, @SessionAttribute("user") User user){
+    public ResponseEntity<HttpStatus> updateCardBoard(@RequestParam Integer cardId, @RequestParam Integer newList, @SessionAttribute("user") User user){
         try {
-            cardService.updateCardBoard(cardId, newBoard, user);
+            cardService.updateCardList(cardId, newList, user);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

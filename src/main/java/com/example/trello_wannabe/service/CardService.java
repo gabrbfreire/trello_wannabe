@@ -15,14 +15,14 @@ public class CardService {
     @Autowired
     CardRepository cardRepository;
 
-    public List<Card> getCards(Integer boardId, User user){
+    public List<Card> getCards(Integer boardId){
 
-        return cardRepository.selectCardsByBoardId(boardId, user.getUser_id());
+        return cardRepository.selectCardsByListId(boardId);
     }
 
-    public void createCard(String title, Integer boardId, User user){
+    public void createCard(String title, Integer listId, User user){
 
-        cardRepository.createCard(title, boardId, user.getUser_id());
+        cardRepository.createCard(title, listId, user.getUser_id());
     }
 
     public void updateCardTitle(Integer cardId, String newTitle, User user){
@@ -30,9 +30,9 @@ public class CardService {
         cardRepository.updateCardTitle(cardId, newTitle, user.getUser_id());
     }
 
-    public void updateCardBoard(Integer cardId, Integer newBoardId, User user){
+    public void updateCardList(Integer cardId, Integer newListId, User user){
 
-        cardRepository.updateCardBoard(cardId, newBoardId, user.getUser_id());
+        cardRepository.updateCardList(cardId, newListId, user.getUser_id());
     }
 
     public void deleteCard(Integer cardId, User user){

@@ -8,7 +8,7 @@ import javax.persistence.*;
         procedureName = "CreateCard",
         parameters = {
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "cardTitle", type = String.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardId", type = Integer.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "listId", type = Integer.class),
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
         }
         )
@@ -22,11 +22,11 @@ import javax.persistence.*;
         }
 )
 @NamedStoredProcedureQuery(
-        name = "UpdateCardBoard",
-        procedureName = "UpdateCardBoard",
+        name = "UpdateCardList",
+        procedureName = "UpdateCardList",
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "cardId", type = Integer.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardId", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "listId", type = Integer.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
         }
 )
@@ -36,8 +36,8 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer card_id;
     private String card_title;
-    private Integer boards_board_id;
     private Integer user_id;
+    private Integer list_list_id;
 
     public Integer getCard_id() {
         return card_id;
@@ -55,19 +55,19 @@ public class Card {
         this.card_title = card_title;
     }
 
-    public Integer getBoards_board_id() {
-        return boards_board_id;
-    }
-
-    public void setBoards_board_id(Integer boards_board_id) {
-        this.boards_board_id = boards_board_id;
-    }
-
     public Integer getUser_id() {
         return user_id;
     }
 
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
+    }
+
+    public Integer getList_list_id() {
+        return list_list_id;
+    }
+
+    public void setList_list_id(Integer list_list_id) {
+        this.list_list_id = list_list_id;
     }
 }
