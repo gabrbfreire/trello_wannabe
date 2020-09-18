@@ -38,7 +38,7 @@
 
     <div class="album py-5 bg-light">
       <div class="container">
-        <div class="row">
+        <div class="row flex-nowrap">
 
 
 
@@ -55,11 +55,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <input type="email" class="m-4 rounded bg-light" id="card-new-title"
-                 aria-describedby="emailHelp" placeholder="Card title">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="update-card-modal-button" data-dismiss="modal">Update</button>
-          </div>
+          <form id="update-card-modal-form">
+            <input type="text" class="m-4 rounded bg-light" id="card-new-title"
+                   aria-describedby="emailHelp" placeholder="Card title" required pattern="[a-zA-Z0-9\s]+" maxlength="20">
+            <div class="modal-footer">
+              <button type="submit" value="Submit" class="btn btn-primary" id="update-card-modal-button">Update</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -73,11 +75,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <input type="email" class="m-4 rounded bg-light" id="card-title"
-                 aria-describedby="emailHelp" placeholder="Card title">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="create-card-modal-button" data-dismiss="modal">Create</button>
-          </div>
+          <form id="create-card-modal-form">
+            <input type="text" class="m-4 rounded bg-light" id="card-title"
+                   aria-describedby="emailHelp" placeholder="Card title" required pattern="[a-zA-Z0-9\s]+" maxlength="20">
+            <div class="modal-footer">
+              <button type="submit" value="Submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -91,11 +95,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <input type="email" class="m-4 rounded bg-light" id="list-title"
-                 aria-describedby="emailHelp" placeholder="List title">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="create-list-modal-button" data-dismiss="modal">Create</button>
-          </div>
+          <form id="create-list-modal-form">
+            <input type="text" class="m-4 rounded bg-light" id="list-title"
+                   aria-describedby="emailHelp" placeholder="List title" required pattern="[a-zA-Z0-9\s]+" maxlength="20">
+            <div class="modal-footer">
+              <button type="submit" value="Submit" class="btn btn-primary" id="create-list-modal-button">Create</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
