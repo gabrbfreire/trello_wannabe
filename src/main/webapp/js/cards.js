@@ -5,7 +5,7 @@ function logout() {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/logout",
+            url: "logout",
             success: window.location.href = 'login'
         })
     });
@@ -22,7 +22,7 @@ function getLists(){
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/lists",
+        url: "lists",
         success:function(data) {
             buildLists(data);
             getCards(); // Creates cards only after lists are done
@@ -34,7 +34,7 @@ function getCards(){
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/cards/get",
+        url: "cards/get",
         success:function(data) {
             buildCards(data);
             setCreateUpdateDeleteEvent();
@@ -46,7 +46,7 @@ function getUserEmail(){
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/boards/getEmail",
+        url: "boards/getEmail",
         success:function(data) {
             $('#email').text(data);
         }

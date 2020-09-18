@@ -4,7 +4,7 @@ function logout() {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/logout",
+            url: "logout",
             success: window.location.href = 'login'
         })
     });
@@ -13,7 +13,7 @@ function logout() {
 $(document).ready(function () {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/endBoardSession"
+        url: "endBoardSession"
     })
     getBoards();
     getUserEmail();
@@ -24,7 +24,7 @@ function getBoards(){
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/boards/get",
+        url: "boards/get",
         success:function(data) {
             buildBoards(data);
             setViewDeleteUpdateEvents();
@@ -36,7 +36,7 @@ function getUserEmail(){
 
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/boards/getEmail",
+        url: "boards/getEmail",
         success:function(data) {
             $('#email').text(data);
         }
