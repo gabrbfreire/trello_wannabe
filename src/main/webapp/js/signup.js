@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $.ajax({
     type: "GET",
-    url: "http://localhost:8080/logout"
+    url: "logout"
   })
 });
 
@@ -24,7 +24,7 @@ function register(email, password, passwordRepeat) {
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "http://localhost:8080/signup",
+      url: "signup",
       data: {email: email, password: password},
       success:function() {
         window.location.href = 'login'

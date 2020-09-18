@@ -112,7 +112,7 @@ $('#create-card-modal-form').on('submit', function (e){
     console.log(cardTitle)
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/cards",
+        url: "cards",
         data: {title: cardTitle, listId: listId},
         success:function() {
             getLists();
@@ -128,7 +128,7 @@ $('#update-card-modal-form').on('submit', function (e){
 
     $.ajax({
         type: "PUT",
-        url: "http://localhost:8080/cards/updateTitle",
+        url: "cards/updateTitle",
         data: {cardId: cardId, newTitle: newTitle},
         success:function() {
             getLists();
@@ -144,7 +144,7 @@ $('#create-list-modal-form').on('submit', function (e){
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/lists",
+        url: "lists",
         data: {index: 1, title: listTitle},
         success:function() {
             getLists();
@@ -167,7 +167,7 @@ function setCreateUpdateDeleteEvent() {
 
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:8080/cards",
+            url: "cards",
             data: {cardId: cardId},
             success:function() {
                 getLists();
@@ -191,7 +191,7 @@ function setCreateUpdateDeleteEvent() {
 
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:8080/lists",
+            url: "lists",
             data: {listId: listId},
             success:function() {
                 getLists();

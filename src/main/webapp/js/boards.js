@@ -81,7 +81,7 @@ $('#new-board-modal-form').on('submit', function (e){
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/boards/",
+        url: "boards",
         data: {boardName: boardName},
         success:function() {
             getBoards();
@@ -106,7 +106,7 @@ function setViewDeleteUpdateEvents(){
     $('#delete-modal-button').on('click', function (){
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:8080/boards",
+            url: "boards",
             data: {boardId: boardId},
             success:function() {
                 getBoards();
@@ -131,7 +131,7 @@ function setViewDeleteUpdateEvents(){
 
         $.ajax({
             type: "PUT",
-            url: "http://localhost:8080/boards",
+            url: "boards",
             data: {boardId: boardId, boardNewName: boardNewName},
             success:function() {
                 getBoards();
@@ -145,7 +145,7 @@ function setViewDeleteUpdateEvents(){
 
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/boards/storeBoardId",
+            url: "boards/storeBoardId",
             data: {boardId: boardId},
             success:function() {
                 window.location.href = 'cards'
