@@ -1,32 +1,37 @@
-function register(name, lastName, email, password, passwordRepeat) {
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+$(document).ready(function () {
+  $.ajax({
+    type: "GET",
+    url: "http://localhost:8080/logout"
+  })
+});
 
-      if (this.responseText == "Saved") {
-        window.location.href = 'boards';
-      } else {
-        document.getElementById("result").innerHTML = 'this.responseText';
-      }
+$('#register-form').on('submit', function (e) {
+  e.preventDefault();
 
-    }
-  };
-  xhttp.open("POST", "signup?email=" + email + "&password=" + password, true);
-  xhttp.send();
-}
+  let email = $('#user-email').val();
+  let password = $('#user-password').val();
+  let passwordRepeat = $('#user-repeat-password').val();
 
-
-document.getElementById('register-form').addEventListener('submit', function () {
-
-  let email = document.getElementById('user-email').value;
-  let password = document.getElementById('user-password').value;
-  let passwordRepeat = document.getElementById('user-repeat-password').value;
-
-  if (password === passwordRepeat) {
+  if (password == passwordRepeat) {
     register(email, password, passwordRepeat);
   } else {
     document.getElementById('result').innerHTML = "Passwords do not match";
   }
-
-  event.preventDefault();
 });
+
+function register(email, password, passwordRepeat) {
+
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8080/signup",
+      data: {email: email, password: password},
+      success:function() {
+        window.location.href = 'login'
+      },
+      error: function (){
+        $('#result').text('User already exists');
+      }
+    })
+  });
+}

@@ -5,11 +5,11 @@ $(document).ready(function () {
   })
 });
 
-$('#login-form').on('submit', function () {
+$('#login-form').on('submit', function (e) {
   let email = $('#user-email').val();
   let password = $('#user-password').val();
   login(email, password);
-  event.preventDefault();
+  e.preventDefault();
 });
 
 function login(email, password) {
