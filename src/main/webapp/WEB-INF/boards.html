@@ -41,7 +41,6 @@
                 <div class="row">
 
 
-
                 </div>
             </div>
         </div>
@@ -56,11 +55,13 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <input type="email" class="m-4 rounded bg-light" id="board-name"
-                           aria-describedby="emailHelp" placeholder="Board name">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="new-board-modal-button" data-dismiss="modal">Create</button>
-                    </div>
+                    <form id="new-board-modal-form">
+                        <input type="text" class="m-4 rounded bg-light" id="board-name"
+                               aria-describedby="emailHelp" placeholder="Board name" required pattern="[a-zA-Z0-9\s]+" maxlength="20">
+                        <div class="modal-footer">
+                            <button type="submit" value="Submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -91,11 +92,13 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <input type="email" class="m-4 rounded bg-light" id="board-new-name"
-                           aria-describedby="emailHelp" placeholder="Board new name">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="update-modal-button" data-dismiss="modal">Update</button>
-                    </div>
+                    <form id="update-modal-form">
+                        <input type="text" class="m-4 rounded bg-light" id="board-new-name"
+                               aria-describedby="emailHelp" required pattern="[a-zA-Z0-9\s]+" maxlength="20">
+                        <div class="modal-footer">
+                            <button type="submit" value="Submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

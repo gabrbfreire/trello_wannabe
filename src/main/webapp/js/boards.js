@@ -73,9 +73,10 @@ function buildBoards(data){
 }
 
 //CREATE
-$('#new-board-modal-button').on('click', createNewBoard);
-
-function createNewBoard(){
+$('#new-board-modal-form').on('submit', function (e){
+    e.preventDefault();
+    $('#newBoardModal').modal('toggle');
+    console.log('a')
     let boardName = $('#board-name').val();
 
     $.ajax({
@@ -86,7 +87,8 @@ function createNewBoard(){
             getBoards();
         }
     });
-}
+});
+
 
 // Creates events after the boards are created
 function setViewDeleteUpdateEvents(){
@@ -121,7 +123,10 @@ function setViewDeleteUpdateEvents(){
         $('#board-new-name').val(boardName);
     });
 
-    $('#update-modal-button').on('click', function (){
+    $('#update-modal-form').on('submit', function (e){
+        e.preventDefault();
+        $('#updateBoardModal').modal('toggle');
+
         let boardNewName = $('#board-new-name').val();
 
         $.ajax({
@@ -147,6 +152,5 @@ function setViewDeleteUpdateEvents(){
             }
         });
     });
-
 }
 
