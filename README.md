@@ -2,4 +2,7 @@
 
 Using Spring, Thymeleaf, JQuery, Bootstrap and MySQL
 
-![Screenshot](https://user-images.githubusercontent.com/50384743/93391084-06e00d00-f845-11ea-958d-81aaa6cf4cb4.PNG)
+To do: drag and drop
+
+Database model:
+![Screenshot](https://user-images.githubusercontent.com/50384743/93641648-01183200-f9d3-11ea-8124-6dfef0a10912.png)
