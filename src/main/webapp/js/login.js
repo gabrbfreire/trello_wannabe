@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $.ajax({
     type: "GET",
-    url: "http://localhost:8080/logout"
+    url: "logout"
   })
 });
 
@@ -16,7 +16,7 @@ function login(email, password) {
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "http://localhost:8080/login",
+      url: "login",
       data: {email: email, password: password},
       success:function() {
         window.location.href = 'boards'
