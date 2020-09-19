@@ -39,6 +39,7 @@ public class Card {
     private String card_title;
     private Integer user_id;
     private Integer list_list_id;
+    private Integer card_index;
 
     public Integer getCard_id() {
         return card_id;
@@ -70,5 +71,13 @@ public class Card {
 
     public void setList_list_id(Integer list_list_id) {
         this.list_list_id = list_list_id;
+    }
+
+    public Integer getCard_index() {
+        return card_index;
+    }
+
+    public void setCard_index(Integer card_index) {
+        this.card_index = card_index;
     }
 }

@@ -1,4 +1,3 @@
-
 $("#logout").on("click", logout);
 
 function logout() {
@@ -12,6 +11,13 @@ function logout() {
 }
 
 $(document).ready(function () {
+
+    let el = document.getElementById("lists-sortable");
+
+    new Sortable(el, {
+        group: 'lists', // set both lists to same group
+        animation: 150
+    });
 
     getLists();
     getUserEmail();
@@ -53,42 +59,49 @@ function getUserEmail(){
     });
 }
 
-
-function buildLists(data){
+function buildLists(data) {
 
     //Removes all lists from page
     $(".row").empty();
 
     // Creates the "New Board" button
     $('.row').append(
-        '<div class="col-md-3" id="new-list-button">'+
-        '<div class="card mb-4 box-shadow">'+
+        '<div class="col-md-3" id="new-list-button">' +
+        '<div class="card mb-4 box-shadow">' +
         '<button type="button" class="btn btn-sm btn-outline-secondary create-list" data-toggle="modal" data-target="#createList">New List</button>'
     );
 
+
     // Creates all boards on page
-    data.forEach( function (list, index) {
+    data.forEach(function (list, index) {
 
         $('#new-list-button').before(
             '<div class="col-md-3 board">' +
             '<div class="card mb-4 box-shadow">' +
-            '<div class="card-body">' +
-            '<button type="button" class="close delete-list">'+
-            '<i class="fas fa-times"></i>'+
-            '</button>'+
-            '<p class="card-text" id="'+ data[index].list_id +'">' + data[index].list_title + '</p>' +
+            '<div class="card-body">'+
+            '<button type="button" class="close delete-list">' +
+            '<i class="fas fa-times"></i>' +
+            '</button>' +
+            '<p class="card-text" id="' + data[index].list_id + '">' + data[index].list_title + '</p>' +
+            '<div id="card-list-'+data[index].list_id+'" > </div>'+
             '<div class="card box-shadow">' +
-            '<button type="button" class="btn btn-sm btn-outline-secondary create-card-button" data-toggle="modal" data-target="#createCardModal">New Card</button>'
-        )
+            '<button type="button" class="btn btn-sm btn-outline-secondary create-card-button" data-toggle="modal" data-target="#createCardModal">New Card</button>')
+
+        let el = document.getElementById("card-list-" + data[index].list_id);
+
+        new Sortable(el, {
+            group: 'cards', // set both lists to same group
+            animation: 150
+        });
     });
 }
 
-function buildCards(data){
 
+function buildCards(data){
 
     data.forEach( function (card, index) {
 
-        $('#'+ card.list_list_id +'').after(
+        $('#'+"card-list-"+ card.list_list_id +'').append(
             '<div class="d-flex justify-content-end border rounded mb-3">' +
             '<div class="card-body " id="card-text-'+data[index].card_id+'">'+ card.card_title +'</div>' +
             '<div class="dropdown show">'+
@@ -109,7 +122,6 @@ $('#create-card-modal-form').on('submit', function (e){
 
     cardTitle = $('#card-title').val();
 
-    console.log(cardTitle)
     $.ajax({
         type: "POST",
         url: "cards",
@@ -153,6 +165,7 @@ $('#create-list-modal-form').on('submit', function (e){
 });
 
 function setCreateUpdateDeleteEvent() {
+
     let cardTitle;
 
     // CREATE
