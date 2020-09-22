@@ -85,10 +85,21 @@ $('#new-board-modal-form').on('submit', function (e){
         data: {boardName: boardName},
         success:function() {
             getBoards();
+            $('#board-name').val('');
         }
     });
-});
 
+});
+// newBoardModal
+// updateBoardModal
+
+$('#newBoardModal').on('shown.bs.modal', function (){
+    $('#board-name').focus();
+})
+
+$('#updateBoardModal').on('shown.bs.modal', function (){
+    $('#board-new-name').focus();
+})
 
 // Creates events after the boards are created
 function setViewDeleteUpdateEvents(){
@@ -121,6 +132,7 @@ function setViewDeleteUpdateEvents(){
 
         // Shows current name on the update input
         $('#board-new-name').val(boardName);
+        $('#board-new-name').focus();
     });
 
     $('#update-modal-form').on('submit', function (e){
