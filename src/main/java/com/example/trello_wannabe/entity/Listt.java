@@ -12,6 +12,15 @@ import javax.persistence.*;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "listNewTitle", type = String.class),
         }
 )
+//UpdateListIndex
+@NamedStoredProcedureQuery(
+        name = "UpdateListIndex",
+        procedureName = "UpdateListIndex",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "listId", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "listIndex", type = Integer.class),
+        }
+)
 public class Listt {
 
     @Id

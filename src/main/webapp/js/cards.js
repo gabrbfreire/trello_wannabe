@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     new Sortable(el, {
         group: 'lists', // set both lists to same group
-        animation: 150
+        animation: 150,
     });
 
     getLists();
@@ -72,7 +72,7 @@ function buildLists(data) {
     );
 
 
-    // Creates all boards on page
+    // Creates all lists on page
     data.forEach(function (list, index) {
 
         $('#new-list-button').before(
@@ -85,13 +85,26 @@ function buildLists(data) {
             '<p class="card-text" id="' + data[index].list_id + '">' + data[index].list_title + '</p>' +
             '<div id="card-list-'+data[index].list_id+'" > </div>'+
             '<div class="card box-shadow">' +
-            '<button type="button" class="btn btn-sm btn-outline-secondary create-card-button" data-toggle="modal" data-target="#createCardModal">New Card</button>')
+            '<button type="button" class="btn btn-sm btn-outline-secondary create-card-button" data-toggle="modal" data-target="#createCardModal">New Card</button>');
 
         let el = document.getElementById("card-list-" + data[index].list_id);
 
         new Sortable(el, {
             group: 'cards', // set both lists to same group
-            animation: 150
+            animation: 150,
+
+            // Update cards index event
+            onUpdate: function (evt){
+                let cardsIdsOrder = [];
+
+                for(let i=0;i<evt.from.getElementsByClassName('d-flex').length;i++){
+
+                    evt.from.getElementsByClassName('d-flex')[i].setAttribute('id', 'list-'+ list.list_id +'-card-index-'+i);
+                    cardsIdsOrder.push(evt.from.getElementsByClassName('d-flex')[i].childNodes[0].id.replace('card-text-',''));
+                }
+                updateCardsIndex(cardsIdsOrder);
+                cardsIdsOrder = [];
+            },
         });
     });
 }
@@ -99,11 +112,12 @@ function buildLists(data) {
 
 function buildCards(data){
 
-    data.forEach( function (card, index) {
+    data = _.sortBy(data, "card_index");
 
+    data.forEach( function (card, index) {
         $('#'+"card-list-"+ card.list_list_id +'').append(
-            '<div class="d-flex justify-content-end border rounded mb-3">' +
-            '<div class="card-body " id="card-text-'+data[index].card_id+'">'+ card.card_title +'</div>' +
+            '<div class="d-flex justify-content-end border rounded mb-3" id="list-'+ card.list_list_id +'-card-index-'+card.card_index+'">' +
+            '<div class="card-body" id="card-text-'+card.card_id+'">'+ card.card_title +'</div>' +
             '<div class="dropdown show">'+
             '<a class="btn btn-secondary bg-light border-0 dropdown-white" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h text-body"></i></a>'+
             '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="'+data[index].card_id+'">'+
@@ -113,19 +127,20 @@ function buildCards(data){
     });
 }
 
+// MODAL EVENTS
+let listId, cardId, cardIndex;
 
-let listId, cardId;
 // CREATE card
 $('#create-card-modal-form').on('submit', function (e){
     e.preventDefault();
     $('#createCardModal').modal('toggle');
 
-    cardTitle = $('#card-title').val();
+    let cardTitle = $('#card-title').val();
 
     $.ajax({
         type: "POST",
         url: "cards",
-        data: {title: cardTitle, listId: listId},
+        data: {title: cardTitle, listId: listId, cardIndex: cardIndex},
         success:function() {
             getLists();
         }
@@ -148,6 +163,17 @@ $('#update-card-modal-form').on('submit', function (e){
     });
 });
 
+// UPDATE Cards index
+function updateCardsIndex(cardsIdsOrder){
+    cardsIdsOrder.forEach(function (data, index){
+        $.ajax({
+            type: "PUT",
+            url: "cards/updateIndex",
+            data: {cardId: data, newIndex: index}
+        });
+    })
+}
+
 //CREATE lists
 $('#create-list-modal-form').on('submit', function (e){
     e.preventDefault();
@@ -164,6 +190,9 @@ $('#create-list-modal-form').on('submit', function (e){
     });
 });
 
+
+
+// LIST EVENTS
 function setCreateUpdateDeleteEvent() {
 
     let cardTitle;
@@ -171,6 +200,13 @@ function setCreateUpdateDeleteEvent() {
     // CREATE
     $('.create-card-button').on('click', function (){
         listId = $(this).parent().siblings('.card-text').attr('id');
+        try {
+            cardIndex = $('#card-list-'+listId).children().last().attr('id');
+            cardIndex = cardIndex.replace('card-index-', '');
+            cardIndex++;
+        }catch (e){
+            cardIndex = 0;
+        }
     });
 
 

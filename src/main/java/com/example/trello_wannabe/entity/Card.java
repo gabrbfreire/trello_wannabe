@@ -4,16 +4,6 @@ import javax.persistence.*;
 
 @Entity(name = "cards")
 @NamedStoredProcedureQuery(
-        name = "CreateCard",
-        procedureName = "CreateCard",
-        parameters = {
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "cardTitle", type = String.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "listId", type = Integer.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class),
-            @StoredProcedureParameter(mode = ParameterMode.IN, name = "boardId", type = Integer.class)
-        }
-        )
-@NamedStoredProcedureQuery(
         name = "UpdateCardTitle",
         procedureName = "UpdateCardTitle",
         parameters = {
@@ -31,6 +21,15 @@ import javax.persistence.*;
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
         }
 )
+@NamedStoredProcedureQuery(
+        name = "UpdateCardIndex",
+        procedureName = "UpdateCardIndex",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "cardId", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "cardIndex", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "userId", type = Integer.class)
+        }
+)
 public class Card {
 
     @Id
@@ -40,6 +39,7 @@ public class Card {
     private Integer user_id;
     private Integer list_list_id;
     private Integer card_index;
+    private Integer board_id;
 
     public Integer getCard_id() {
         return card_id;
@@ -79,5 +79,13 @@ public class Card {
 
     public void setCard_index(Integer card_index) {
         this.card_index = card_index;
+    }
+
+    public Integer getBoard_id() {
+        return board_id;
+    }
+
+    public void setBoard_id(Integer board_id) {
+        this.board_id = board_id;
     }
 }

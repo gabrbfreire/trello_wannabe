@@ -14,4 +14,7 @@ public interface ListRepository extends JpaRepository<Listt, Integer> {
 
     @Procedure(name = "UpdateList")
     void UpdateList(@Param("listId") Integer listId, @Param("listNewTitle") String listNewTitle);
+
+    @Procedure(name = "UpdateListIndex")
+    void UpdateListIndex(@Param("listId") Integer listId, @Param("listIndex") Integer listNewTitle);
 }

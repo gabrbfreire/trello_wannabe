@@ -13,12 +13,15 @@ public interface CardRepository extends JpaRepository<Card, Integer> {
     @Query(value = "CALL SelectCardsByBoardId(:boardId);", nativeQuery = true)
     List<Card> selectCardsByListId(@Param("boardId") Integer boardId);
 
-    @Procedure(name = "CreateCard")
-    void createCard(@Param("cardTitle") String cardTitle, @Param("listId") Integer listId, @Param("userId") Integer userId, @Param("boardId") Integer boardId);
+//    @Procedure(name = "CreateCard")
+//    void createCard(@Param("cardTitle") String cardTitle, @Param("listId") Integer listId, @Param("userId") Integer userId, @Param("boardId") Integer boardId);
 
     @Procedure(name = "UpdateCardTitle")
     void updateCardTitle(@Param("cardId") Integer cardId, @Param("cardTitle") String cardTitle, @Param("userId") Integer userId);
 
     @Procedure(name = "UpdateCardList")
     void updateCardList(@Param("cardId") Integer cardId, @Param("listId") Integer listId, @Param("userId") Integer userId);
+
+    @Procedure(name = "UpdateCardIndex")
+    void updateCardIndex(@Param("cardId") Integer cardId, @Param("cardIndex") Integer cardIndex, @Param("userId") Integer userId);
 }

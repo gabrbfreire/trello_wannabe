@@ -44,6 +44,15 @@ public class ListController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PutMapping(path = "/lists/updateIndex")
+    public ResponseEntity<HttpStatus> updateListIndex(@RequestParam Integer newIndex, @RequestParam Integer listId){
+        try {
+            listService.updateListIndex(listId, newIndex);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @DeleteMapping(path = "/lists")
     public ResponseEntity<HttpStatus> deleteList(@RequestParam Integer listId){

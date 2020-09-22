@@ -50,9 +50,9 @@ public class CardController {
 
     // Create Card
     @PostMapping(path = "/cards")
-    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @RequestParam Integer listId, @SessionAttribute("user") User user, @SessionAttribute("currentBoardId") Integer boardId){
+    public ResponseEntity<HttpStatus> createCard(@RequestParam String title, @RequestParam Integer listId, @RequestParam Integer cardIndex, @SessionAttribute("user") User user, @SessionAttribute("currentBoardId") Integer boardId){
         try{
-            cardService.createCard(title, listId, user, boardId);
+            cardService.createCard(title, listId, user, boardId, cardIndex);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -70,9 +70,20 @@ public class CardController {
         }
     }
 
-    // Update Card Board
-    @PutMapping(path = "/cards/updateBoard")
-    public ResponseEntity<HttpStatus> updateCardBoard(@RequestParam Integer cardId, @RequestParam Integer newList, @SessionAttribute("user") User user){
+    // Update Card Index
+    @PutMapping(path = "/cards/updateIndex")
+    public ResponseEntity<HttpStatus> updateCardIndex(@RequestParam Integer cardId, @RequestParam Integer newIndex, @SessionAttribute("user") User user){
+        try {
+            cardService.updateCardIndex(cardId, newIndex, user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Update Card List
+    @PutMapping(path = "/cards/updateList")
+    public ResponseEntity<HttpStatus> updateCardList(@RequestParam Integer cardId, @RequestParam Integer newList, @SessionAttribute("user") User user){
         try {
             cardService.updateCardList(cardId, newList, user);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -80,6 +91,7 @@ public class CardController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     // Delete Card
     @DeleteMapping(path = "/cards")

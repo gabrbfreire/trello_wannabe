@@ -32,6 +32,11 @@ public class ListService {
         listRepository.UpdateList(listId, newTitle);
     }
 
+    public void updateListIndex(Integer listId, Integer newIndex){
+
+        listRepository.UpdateListIndex(listId, newIndex);
+    }
+
     public void deleteList(Integer listId){
 
         listRepository.deleteById(listId);

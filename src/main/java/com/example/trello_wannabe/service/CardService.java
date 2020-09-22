@@ -20,9 +20,15 @@ public class CardService {
         return cardRepository.selectCardsByListId(boardId);
     }
 
-    public void createCard(String title, Integer listId, User user, Integer boardId){
+    public void createCard(String title, Integer listId, User user, Integer boardId, Integer cardIndex){
 
-        cardRepository.createCard(title, listId, user.getUser_id(), boardId);
+        Card newCard = new Card();
+        newCard.setCard_title(title);
+        newCard.setList_list_id(listId);
+        newCard.setUser_id(user.getUser_id());
+        newCard.setBoard_id(boardId);
+        newCard.setCard_index(cardIndex);
+        cardRepository.save(newCard);
     }
 
     public void updateCardTitle(Integer cardId, String newTitle, User user){
@@ -33,6 +39,11 @@ public class CardService {
     public void updateCardList(Integer cardId, Integer newListId, User user){
 
         cardRepository.updateCardList(cardId, newListId, user.getUser_id());
+    }
+
+    public void updateCardIndex(Integer cardId, Integer cardIndex, User user){
+
+        cardRepository.updateCardIndex(cardId, cardIndex, user.getUser_id());
     }
 
     public void deleteCard(Integer cardId, User user){
