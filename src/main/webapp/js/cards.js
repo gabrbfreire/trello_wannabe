@@ -174,6 +174,9 @@ function updateCardsIndex(cardsIdsOrder){
     })
 }
 
+// todo update cards lists
+// todo update lists index
+
 //CREATE lists
 $('#create-list-modal-form').on('submit', function (e){
     e.preventDefault();
