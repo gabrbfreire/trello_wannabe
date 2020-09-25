@@ -2,7 +2,7 @@
 
 Using Spring, Thymeleaf, JQuery, Bootstrap and MySQL
 
-To do: drag and drop
+Heroku link: https://trello-clone-java.herokuapp.com
 
 Database model:<br/>
 
