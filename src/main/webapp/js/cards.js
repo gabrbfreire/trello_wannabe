@@ -22,8 +22,12 @@ $(document).ready(function () {
 
             for(let i=0;i<evt.from.getElementsByClassName('col-md-3').length-1;i++){
 
-                evt.from.getElementsByClassName('col-md-3')[i].setAttribute('id', 'list-'+i);
-                listsIdsOrder.push(evt.from.getElementsByClassName('col-md-3')[i].childNodes[0].childNodes[0].childNodes[1].id);
+                try{
+                    evt.from.getElementsByClassName('col-md-3')[i].setAttribute('id', 'list-'+i);
+                    listsIdsOrder.push(evt.from.getElementsByClassName('col-md-3')[i].childNodes[0].childNodes[0].childNodes[1].id);
+                }catch (e){
+                    getLists();
+                }
             }
             updateListIndex(listsIdsOrder);
             listsIdsOrder = [];
