@@ -15,8 +15,19 @@ $(document).ready(function () {
     let el = document.getElementById("lists-sortable");
 
     new Sortable(el, {
-        group: 'lists', // set both lists to same group
+        group: 'lists',
         animation: 150,
+        onUpdate: function (evt){
+            let listsIdsOrder = [];
+
+            for(let i=0;i<evt.from.getElementsByClassName('col-md-3').length-1;i++){
+
+                evt.from.getElementsByClassName('col-md-3')[i].setAttribute('id', 'list-'+i);
+                listsIdsOrder.push(evt.from.getElementsByClassName('col-md-3')[i].childNodes[0].childNodes[0].childNodes[1].id);
+            }
+            updateListIndex(listsIdsOrder);
+            listsIdsOrder = [];
+        },
     });
 
     getLists();
@@ -61,6 +72,8 @@ function getUserEmail(){
 
 function buildLists(data) {
 
+    data = _.sortBy(data, "list_index");
+
     //Removes all lists from page
     $(".row").empty();
 
@@ -76,7 +89,7 @@ function buildLists(data) {
     data.forEach(function (list, index) {
 
         $('#new-list-button').before(
-            '<div class="col-md-3 board">' +
+            '<div class="col-md-3 board" id="list-' + data[index].list_index + '">' +
             '<div class="card mb-4 box-shadow">' +
             '<div class="card-body">'+
             '<button type="button" class="close delete-list">' +
@@ -105,6 +118,20 @@ function buildLists(data) {
                 updateCardsIndex(cardsIdsOrder);
                 cardsIdsOrder = [];
             },
+            onAdd: function (evt) {
+                let cardsIdsOrder = [];
+
+                for(let i=0;i<evt.to.getElementsByClassName('d-flex').length;i++){
+
+                    evt.to.getElementsByClassName('d-flex')[i].setAttribute('id', 'list-'+ list.list_id +'-card-index-'+i);
+                    cardsIdsOrder.push(evt.to.getElementsByClassName('d-flex')[i].childNodes[0].id.replace('card-text-',''));
+                }
+                let itemId = evt.item.id;
+                let cardId = $('#'+ itemId).children()[0].id.replace('card-text-','');
+                updateCardsList(cardId, list.list_id)
+                updateCardsIndex(cardsIdsOrder);
+                cardsIdsOrder = [];
+            }
         });
     });
 }
@@ -127,6 +154,20 @@ function buildCards(data){
     });
 }
 
+
+$('#createList').on('shown.bs.modal', function (){
+    $('#list-title').focus();
+});
+
+$('#createCardModal').on('shown.bs.modal', function (){
+    $('#card-title').focus();
+});
+
+$('#updateCardModal').on('shown.bs.modal', function (){
+    $('#card-new-title').focus();
+});
+
+
 // MODAL EVENTS
 let listId, cardId, cardIndex;
 
@@ -134,7 +175,6 @@ let listId, cardId, cardIndex;
 $('#create-card-modal-form').on('submit', function (e){
     e.preventDefault();
     $('#createCardModal').modal('toggle');
-
     let cardTitle = $('#card-title').val();
 
     $.ajax({
@@ -143,6 +183,7 @@ $('#create-card-modal-form').on('submit', function (e){
         data: {title: cardTitle, listId: listId, cardIndex: cardIndex},
         success:function() {
             getLists();
+            $('#card-title').val('');
         }
     });
 });
@@ -174,7 +215,15 @@ function updateCardsIndex(cardsIdsOrder){
     })
 }
 
-// todo update cards lists
+// UPDATE Cards list
+function updateCardsList(cardId, listId){
+    $.ajax({
+        type: "PUT",
+        url: "/cards/updateList",
+        data: {cardId: cardId, newList: listId},
+    });
+}
+
 // todo update lists index
 
 //CREATE lists
@@ -182,17 +231,37 @@ $('#create-list-modal-form').on('submit', function (e){
     e.preventDefault();
     $('#createList').modal('toggle');
     let listTitle = $('#list-title').val();
+    let listIndex;
+
+    try {
+        listIndex = $('#lists-sortable').children('.board').attr('id').replace('list-','');
+        listIndex++;
+        console.log(listIndex);
+    }catch (e){
+        listIndex = 0;
+    }
 
     $.ajax({
         type: "POST",
         url: "lists",
-        data: {index: 1, title: listTitle},
+        data: {index: listIndex, title: listTitle},
         success:function() {
             getLists();
+            $('#list-title').val('');
         }
     });
 });
 
+// UPDATE Lists index
+function updateListIndex(listsIdsOrder){
+    listsIdsOrder.forEach(function (data, index) {
+        $.ajax({
+            type: "PUT",
+            url: "/lists/updateIndex",
+            data: {listId: data, newIndex: index}
+        })
+    });
+}
 
 
 // LIST EVENTS
@@ -205,7 +274,7 @@ function setCreateUpdateDeleteEvent() {
         listId = $(this).parent().siblings('.card-text').attr('id');
         try {
             cardIndex = $('#card-list-'+listId).children().last().attr('id');
-            cardIndex = cardIndex.replace('card-index-', '');
+            cardIndex = cardIndex.replace('list-'+ listId +'-card-index-', '');
             cardIndex++;
         }catch (e){
             cardIndex = 0;

@@ -76,7 +76,6 @@ function buildBoards(data){
 $('#new-board-modal-form').on('submit', function (e){
     e.preventDefault();
     $('#newBoardModal').modal('toggle');
-    console.log('a')
     let boardName = $('#board-name').val();
 
     $.ajax({

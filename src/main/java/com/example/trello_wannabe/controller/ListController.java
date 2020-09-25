@@ -44,8 +44,9 @@ public class ListController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PutMapping(path = "/lists/updateIndex")
-    public ResponseEntity<HttpStatus> updateListIndex(@RequestParam Integer newIndex, @RequestParam Integer listId){
+    public ResponseEntity<HttpStatus> updateListIndex( @RequestParam Integer listId, @RequestParam Integer newIndex){
         try {
             listService.updateListIndex(listId, newIndex);
             return new ResponseEntity<>(HttpStatus.OK);
