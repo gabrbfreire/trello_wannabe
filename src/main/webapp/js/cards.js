@@ -224,8 +224,6 @@ function updateCardsList(cardId, listId){
     });
 }
 
-// todo update lists index
-
 //CREATE lists
 $('#create-list-modal-form').on('submit', function (e){
     e.preventDefault();
