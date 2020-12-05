@@ -21,7 +21,6 @@ public class MainController{
     private BoardService boardService;
 
 
-
     // -----USER-----
     // Login
     // Get user

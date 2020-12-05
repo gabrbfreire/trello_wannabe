@@ -3,6 +3,7 @@ package com.example.trello_wannabe.service;
 import com.example.trello_wannabe.entity.User;
 import com.example.trello_wannabe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,9 @@ public class UserService {
         User newUser = new User();
         newUser.setUser_email(email);
         newUser.setUser_password(password);
+
+        String passwordHashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
+        newUser.setUser_password(passwordHashed);
         repo.save(newUser);
     }
 
@@ -45,19 +49,11 @@ public class UserService {
         if(userList.isEmpty()){
             return null;
         }else{
-            if(passwordCorrect(password, userList)){
+            if(BCrypt.checkpw(password, userList.get(0).getUser_password())){
                 return userList.get(0);
             }else{
                 return null;
             }
-        }
-    }
-
-    public Boolean passwordCorrect(String password, List<User> userList){
-        if(password.equals(userList.get(0).getUser_password())){
-            return true;
-        }else{
-            return false;
         }
     }
 }

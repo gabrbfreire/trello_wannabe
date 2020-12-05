@@ -25,6 +25,7 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer board_id;
+    
     private String board_name;
     private Integer user_id_user;
 

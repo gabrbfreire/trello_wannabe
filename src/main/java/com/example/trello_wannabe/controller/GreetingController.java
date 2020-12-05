@@ -3,6 +3,8 @@ package com.example.trello_wannabe.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class GreetingController {
 
@@ -21,18 +23,23 @@ public class GreetingController {
         return "signup";
     }
 
+    //If a session exists it will user the method with the SessionAttribute
     @GetMapping("boards")
-    public String boards(){
-//        if(user.getUser_id()!=0){
-//            return "boards";
-//        }else {
-//            return "login";
-//        }
-        return "boards";
+    public String boards(HttpSession session) {
+        if(session.getAttribute("user")==null){
+            return "login";
+        }else{
+            return "boards";
+        }
     }
 
     @GetMapping("cards")
-    public String cards(){
-        return "cards";
+    public String cards(HttpSession session){
+        if(session.getAttribute("user")==null){
+            return "login";
+        }else{
+            return "cards";
+        }
     }
+
 }
