@@ -2,7 +2,7 @@
 
 Similar to the Trello website with registration of tables, lists, cards and login system. Available on Heroku
 
-Using Spring, Thymeleaf, JQuery, Bootstrap and MySQL
+Using Spring(Spring Boot, Spring Security and Spring Data), Thymeleaf, JQuery, Bootstrap and MySQL
 
 Heroku link: https://trello-clone-java.herokuapp.com
 
