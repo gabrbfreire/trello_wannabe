@@ -13,6 +13,7 @@ Technologies:
 * Bootstrap
 * MySQL
 
+
 Heroku link: https://trello-clone-java.herokuapp.com
 
 Database model:<br/>
